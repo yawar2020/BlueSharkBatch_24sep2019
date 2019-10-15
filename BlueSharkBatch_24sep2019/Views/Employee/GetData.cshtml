@@ -1,0 +1,42 @@
+﻿@model BlueSharkBatch_24sep2019.Models.EmployeeDepartment
+
+
+<table class="table table-striped">
+    <tr>
+        <th>EmpId</th>
+        <th>EmpName</th>
+        <th>EmpSalary</th>
+    </tr>
+    @foreach (var item in Model.EmployeeModels)
+    {
+        <tr>
+            <td>
+                @item.EmpId
+            </td>
+            <td>
+                @item.EmpName
+            </td>
+            <td>
+                @item.EmpSalary
+            </td>
+        </tr>
+
+    }
+</table>
+
+
+<table class="table table-striped">
+    <tr>
+        <th>DeptId</th>
+        <th>DeptName</th>
+    </tr>
+    @foreach (var item in Model.DepartmentModels)
+    {
+
+        <tr>
+            <td>@item.DeptId</td>
+            <td>@item.DeptName</td>
+        </tr>
+    }
+
+</table>
