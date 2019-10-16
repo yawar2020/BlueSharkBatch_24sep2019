@@ -15,4 +15,20 @@ namespace CodeFirstApproach.Models
         public int EmpSalary { get; set; }
         public int DeptId { get; set; }
     }
+
+    public class DepartmentModel
+    {
+        [Key]
+        public int DeptId { get; set; }
+        public string DeptName { get; set; }
+    }
+
+    public class Empdept
+    {
+        public int Empid { get; set; }
+        public string EmpName { get; set; }
+        public int EmpSalary { get; set; }
+        public string DeptName { get; set; }
+
+    }
 }
