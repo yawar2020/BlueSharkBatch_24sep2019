@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using CodeFirstApproach.Models;
+using System.Data.Entity;
 namespace CodeFirstApproach.Controllers
 {
     public class DefaultController : Controller
@@ -12,18 +13,78 @@ namespace CodeFirstApproach.Controllers
         EmployeeContext db = new EmployeeContext();
         public ActionResult Index()
         {
-            var employeedata = from s in db.EmployeeModels
-                               join d in db.DepartmentModeles
-                               on s.DeptId equals d.DeptId
-                               select new Empdept
-                               {
-                                  Empid= s.Empid,
-                                  EmpName=s.EmpName,
-                                  EmpSalary=s.EmpSalary,
-                                  DeptName=d.DeptName
-                               };
+            List<EmployeeModel> employeedata = db.EmployeeModels.ToList();
+                                              
                               
             return View(employeedata);
+        }
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Create(string EmpName, int EmpSalary, int DeptId)
+        {
+            EmployeeModel obj = new EmployeeModel();
+            obj.EmpName = EmpName;
+            obj.EmpSalary = EmpSalary;
+            obj.DeptId = DeptId;
+
+            db.EmployeeModels.Add(obj);
+           int i= db.SaveChanges();
+            if (i > 0)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View();
+            }
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int? id)
+        {
+            EmployeeModel obj = db.EmployeeModels.Find(id);
+            return View(obj);
+        }
+        [HttpPost]
+        public ActionResult Edit(EmployeeModel obj)
+        {
+            db.Entry(obj).State = EntityState.Modified;
+            int i = db.SaveChanges();
+            if (i > 0)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View();
+            }
+        }
+
+        [HttpGet]
+        public ActionResult Delete(int? id)
+        {
+            EmployeeModel obj = db.EmployeeModels.Find(id);
+            return View(obj);
+        }
+        [HttpPost]
+        [ActionName("Delete")]
+        public ActionResult DeleteConfirmed(int? Empid)
+        {
+            EmployeeModel obj = db.EmployeeModels.Find(Empid);
+            db.EmployeeModels.Remove(obj);
+            int i = db.SaveChanges();
+            if (i > 0)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View();
+            }
         }
     }
 }
