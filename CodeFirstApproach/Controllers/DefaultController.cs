@@ -13,9 +13,7 @@ namespace CodeFirstApproach.Controllers
         EmployeeContext db = new EmployeeContext();
         public ActionResult Index()
         {
-            List<EmployeeModel> employeedata = db.EmployeeModels.ToList();
-                                              
-                              
+            List<EmployeeModel> employeedata = db.EmployeeModels.ToList();            
             return View(employeedata);
         }
         [HttpGet]
@@ -24,12 +22,12 @@ namespace CodeFirstApproach.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Create(string EmpName, int EmpSalary, int DeptId)
+        public ActionResult Create(FormCollection frm)
         {
             EmployeeModel obj = new EmployeeModel();
-            obj.EmpName = EmpName;
-            obj.EmpSalary = EmpSalary;
-            obj.DeptId = DeptId;
+            obj.EmpName = frm["EmpName"];
+            obj.EmpSalary = Convert.ToInt32(frm["EmpSalary"]);
+            obj.DeptId = Convert.ToInt32(frm["DeptId"]);
 
             db.EmployeeModels.Add(obj);
            int i= db.SaveChanges();
