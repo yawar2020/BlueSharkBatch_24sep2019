@@ -36,6 +36,52 @@ namespace AdoDotnetExample.Controllers
                 return View();
             }
         }
+
+        [HttpGet]
+        public ActionResult Edit(int?id)
+        {
+            EmployeeModel emp =db.GetEmployeeDatabyid(id); 
+            return View(emp);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(EmployeeModel emp)
+        {
+            int i = db.UpdateData(emp);
+
+
+            if (i > 0)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View();
+            }
+        }
+
+
+        [HttpGet]
+        public ActionResult Delete(int? id) {
+            EmployeeModel emp = db.GetEmployeeDatabyid(id);
+            return View(emp);
+        }
+
+        [HttpPost]
+        [ActionName("Delete")]
+        public ActionResult DeleteConfirmed(int? id)
+        {
+            int i = db.DeleteEmpById(id);
+            if (i > 0)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View();
+            }
+        }
+
         public ActionResult Department()
         {
             DepartmentDetail db = new Models.DepartmentDetail();

@@ -42,11 +42,41 @@ namespace AdoDotnetExample.Models
             }
             return objList;
         }
+
+        public EmployeeModel GetEmployeeDatabyid(int ?id)
+        {
+            DataTable dt = new DataTable();
+            EmployeeBizz obj = new EmployeeBizz();
+            dt = obj.GetEmployeeDatabyid(id);
+            EmployeeModel objitem = new EmployeeModel();
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                objitem.Empid = Convert.ToInt32(dr[0]);
+                objitem.EmpName = dr[1].ToString();
+                objitem.EmpSalary = Convert.ToInt32(dr[2]);
+                objitem.DeptId = Convert.ToInt32(dr[3]);
+                
+            }
+            return objitem;
+        }
+
         public int SaveData(EmployeeModel Emp)
         {
             EmployeeBizz obj = new EmployeeBizz();
             int i = obj.SaveDataDetails(Emp.EmpName, Emp.EmpSalary, Emp.DeptId);
             return i;
+        }
+        public int UpdateData(EmployeeModel Emp)
+        {
+            EmployeeBizz obj = new EmployeeBizz();
+            int i = obj.UpdateDetails(Emp.Empid,Emp.EmpName, Emp.EmpSalary, Emp.DeptId);
+            return i;
+        }
+        public int DeleteEmpById(int? id) {
+            EmployeeBizz obj = new EmployeeBizz();
+            int i = obj.DeleteEmpById(id);
+            return i; 
         }
     }
 

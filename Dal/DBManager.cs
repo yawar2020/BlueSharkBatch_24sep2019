@@ -22,6 +22,8 @@ namespace Dal
             foreach (var item in dict)
             {
                 cmd.Parameters.AddWithValue(item.Key,item.Value);
+                //@Empname parametername
+                //Chatterjee value
             }
             DataTable dt = new DataTable();
             da.Fill(dt);
@@ -29,10 +31,10 @@ namespace Dal
         }
 
 
-        //insert
+        //insert & update
         public int SaveData(string SpName, Dictionary<string, string> dict)
         {
-
+            int i = 0;
             SqlConnection con = new SqlConnection(ConnectionString);
             SqlCommand cmd = new SqlCommand(SpName, con);
             con.Open();
@@ -41,11 +43,19 @@ namespace Dal
             {
                 cmd.Parameters.AddWithValue(item.Key, item.Value);
             }
-            int i = Convert.ToInt32(cmd.ExecuteScalar());
+            if (dict.ContainsKey("@Empid"))
+            {
+                i = Convert.ToInt32(cmd.ExecuteNonQuery());
+
+            }
+            else
+            {
+                 i = Convert.ToInt32(cmd.ExecuteScalar());
+            }
             con.Close();
             return i;
         }
 
-        //Update
+       
     }
 }
