@@ -17,6 +17,10 @@ namespace LayoutsInMVC.Controllers
         {
             return View();
         }
+
+        public ActionResult HtmlHelperExample() {
+            return View();
+        }
         
     }
 }

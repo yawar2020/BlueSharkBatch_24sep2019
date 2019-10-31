@@ -1,0 +1,23 @@
+﻿@model LayoutsInMVC.Models.Employee
+@{
+    ViewBag.Title = "HtmlHelperExample";
+}
+
+<style>
+    .myClass {
+    font-size:x-large;
+    }
+</style>
+<script>
+    function fun() {
+        alert('Hello world');
+    }
+</script>
+
+<h2>HtmlHelperExample</h2>
+
+<input type="text" id="Firstname" name="Firstname" value="Ganesh" class="myClass"  style="background-color:orangered;color:white;" onclick="fun()"/><br />
+@Html.Label("Empnames") @Html.TextBox("Username",null,new {@style= "background-color:skyblue;color:red",@class="myClass",@onclick="fun()" })
+<br />Strongly type HtmlHelper control<br />
+@Html.LabelFor(m => m.EmpNames)
+@Html.TextBoxFor(s=>s.EmpNames)
