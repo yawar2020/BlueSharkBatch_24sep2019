@@ -19,11 +19,18 @@ namespace LayoutsInMVC.Controllers
         }
 
         public ActionResult HtmlHelperExample() {
-            return View();
+            //ViewData["Subject"] = "English";
+            //ViewBag.Subject = "Hindi";
+            TempData["Subject"] = "Sanskrit";
+            return RedirectToAction("ValidationMvc");
         }
 
         public ActionResult ValidationMvc() {
-
+            //string data = Convert.ToString(ViewData["Subject"]); 
+            // string Data = ViewBag.Subject;
+            //string Data = TempData["Subject"].ToString();
+            //TempData.Keep();
+            string Data = TempData.Peek("Subject").ToString();
             return View();
         }
         
