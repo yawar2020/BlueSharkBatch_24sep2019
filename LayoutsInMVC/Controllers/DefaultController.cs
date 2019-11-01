@@ -21,6 +21,11 @@ namespace LayoutsInMVC.Controllers
         public ActionResult HtmlHelperExample() {
             return View();
         }
+
+        public ActionResult ValidationMvc() {
+
+            return View();
+        }
         
     }
 }
