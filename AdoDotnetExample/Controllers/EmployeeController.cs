@@ -88,5 +88,17 @@ namespace AdoDotnetExample.Controllers
 
             return View(db.GetDepartmentData());
         }
+
+        public ActionResult GetAccessService() {
+            ServiceReference1.MyWebServiceSoapClient obj = new ServiceReference1.MyWebServiceSoapClient();
+            ViewBag.Add = obj.Add(16, 20);
+            return View();
+        }
+        public ActionResult GetWcfAccessService()
+        {
+            ServiceReference2.GetDataServiceClient obj = new ServiceReference2.GetDataServiceClient();
+           
+            return View(obj.GetEmployeeData().ToList());
+        }
     }
 }
