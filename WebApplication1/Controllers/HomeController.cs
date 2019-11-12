@@ -16,6 +16,12 @@ namespace WebApplication1.Controllers
             return View();
         }
 
-        
+        public ActionResult GetDataFromService()
+        {
+            ServiceReference1.AddWcfServiceClient obj = new ServiceReference1.AddWcfServiceClient();
+            ViewBag.Add=obj.Add(12, 35);
+            var data=obj.GetData().ToList();
+            return View();
+        }
     }
 }
